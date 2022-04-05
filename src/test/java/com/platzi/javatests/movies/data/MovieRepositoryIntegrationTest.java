@@ -56,6 +56,15 @@ public class MovieRepositoryIntegrationTest {
         assertThat(movieFromDb, is(new Movie(4, "Super 8", 112, Genre.THRILLER)));
     }
 
+    @Test
+    public void load_movie_by_name() {
+        Collection<Movie> movies= movieRepositoryJdbc.findByName("a");
+        assertThat(movies, is(Arrays.asList(
+                new Movie(1, "Dark Knight", 152, Genre.ACTION),
+                new Movie(3, "Matrix", 136, Genre.ACTION)
+        )));
+    }
+
     @After
     public void tearDown() throws Exception {
         final Statement s = dataSource.getConnection().createStatement();

@@ -38,4 +38,9 @@ public class MovieRepositoryJdbc implements MovieRepository {
             resultSet.getInt("minutes"),
             Genre.valueOf(resultSet.getString("genre"))
     );
+
+    public Collection<Movie> findByName(String nameMovie) {
+        Object[] args =  {"%" + nameMovie.toLowerCase() + "%"};
+        return jdbcTemplate.query("select * from movies where LOWER(name) Like ? ", args, movieMapper);
+    }
 }
