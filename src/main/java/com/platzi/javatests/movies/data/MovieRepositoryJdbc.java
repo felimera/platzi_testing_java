@@ -40,7 +40,7 @@ public class MovieRepositoryJdbc implements MovieRepository {
     );
 
     public Collection<Movie> findByName(String nameMovie) {
-        Object[] args =  {"%" + nameMovie.toLowerCase() + "%"};
+        Object[] args = {"%" + nameMovie.toLowerCase() + "%"};
         return jdbcTemplate.query("select * from movies where LOWER(name) Like ? ", args, movieMapper);
     }
 }

@@ -5,18 +5,28 @@ import java.util.Objects;
 public class Movie {
     private Integer id;
     private String name;
-    private int minutes;
+    private Integer minutes;
     private Genre genre;
+    private String director;
 
-    public Movie(String name, int minutes, Genre genre) {
+    public Movie(String name, Integer minutes, Genre genre) {
         this(null, name, minutes, genre);
     }
 
-    public Movie(Integer id, String name, int minutes, Genre genre) {
+    public Movie(Integer id, String name, Integer minutes, Genre genre) {
         this.id = id;
         this.name = name;
         this.minutes = minutes;
         this.genre = genre;
+        this.director = "";
+    }
+
+    public Movie(Integer id, String name, Integer minutes, Genre genre, String director) {
+        this.id = id;
+        this.name = name;
+        this.minutes = minutes;
+        this.genre = genre;
+        this.director = director;
     }
 
     public Integer getId() {
@@ -27,7 +37,7 @@ public class Movie {
         return name;
     }
 
-    public int getMinutes() {
+    public Integer getMinutes() {
         return minutes;
     }
 
@@ -35,17 +45,21 @@ public class Movie {
         return genre;
     }
 
+    public String getDirector() {
+        return director;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return minutes == movie.minutes && Objects.equals(id, movie.id) && Objects.equals(name, movie.name) && genre == movie.genre;
+        return Objects.equals(id, movie.id) && Objects.equals(name, movie.name) && Objects.equals(minutes, movie.minutes) && genre == movie.genre && Objects.equals(director, movie.director);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, minutes, genre);
+        return Objects.hash(id, name, minutes, genre, director);
     }
 
     @Override
@@ -55,6 +69,7 @@ public class Movie {
                 ", name='" + name + '\'' +
                 ", minutes=" + minutes +
                 ", genre=" + genre +
+                ", director='" + director + '\'' +
                 '}';
     }
 }
